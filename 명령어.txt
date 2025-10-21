@@ -42,7 +42,7 @@ git init
 git add .
 
 # 4. 변경 사항을 커밋
-git commit -m "feat: Initial commit for TradingView Webhook Fastapi Server"
+git commit -m "변경 사항"
 
 # 5. GitHub에 생성한 빈 저장소의 URL을 원격 저장소로 등록
 git remote add origin https://github.com/hanane-support/HATB.git
@@ -56,7 +56,7 @@ git push -u origin main
 echo "# HATB" >> README.md
 git init
 git add README.md
-git commit -m "Add Vultr deployment script and finalize file set"
+git commit -m "변경 사항"
 git branch -M main
 git remote add origin https://github.com/hanane-support/HATB.git
 git push -u origin main
@@ -69,5 +69,5 @@ git push -u origin main
 
 # 깃허브 수정내역만 반영
 git add .
-git commit -m "Add Vultr deployment script and finalize file set"
+git commit -m "변경사항"
 git push origin main
