@@ -15,6 +15,9 @@ uvicorn my_server:app --reload --port 8000
 http://127.0.0.1:8000/settings
 http://61.85.61.62:8000/settings
 
+# Vultr 서버ip 관리자 페이지
+http://158.247.199.150/admin
+
 # 캐디 실행
 .\caddy run --config Caddyfile
 
@@ -49,11 +52,11 @@ git remote add origin https://github.com/hanane-support/HATB.git
 git push -u origin main
 
 
-# 한번에 (명령줄에서 새 저장소(repository)를 만드세요.)
+# 깃 한번에 (명령줄에서 새 저장소(repository)를 만드세요.)
 echo "# HATB" >> README.md
 git init
 git add README.md
-git commit -m "first commit"
+git commit -m "Add Vultr deployment script and finalize file set"
 git branch -M main
 git remote add origin https://github.com/hanane-support/HATB.git
 git push -u origin main
@@ -62,3 +65,9 @@ git push -u origin main
 git remote add origin https://github.com/hanane-support/HATB.git
 git branch -M main
 git push -u origin main
+
+
+# 깃허브 수정내역만 반영
+git add .
+git commit -m "Add Vultr deployment script and finalize file set"
+git push origin main
