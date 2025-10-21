@@ -1,0 +1,30 @@
+# 1. 프로젝트 폴더 생성 및 이동
+mkdir trading_bot_app
+cd trading_bot_app
+
+# 2. 가상 환경 생성 (venv)
+python -m venv venv
+
+# 3. 가상 환경 활성화 (Windows PowerShell 기준)
+.\venv\Scripts\Activate
+
+# 서버 실행
+uvicorn my_server:app --reload --port 8000
+
+# 설정 웹사이트
+http://127.0.0.1:8000/settings
+http://61.85.61.62:8000/settings
+
+# 캐디 실행
+.\caddy run --config Caddyfile
+
+# 서버 실행 상태 메시지
+https://your.domain.com
+
+# 로그인 페이지
+https://your.domain.com/login
+https://hanane.kr/login
+
+# 인증된 후에 접근 가능한 설정 관리 페이지
+https://your.domain.com/settings
+https://hanane.kr/settings
