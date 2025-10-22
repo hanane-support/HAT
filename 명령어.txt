@@ -8,8 +8,11 @@ python -m venv venv
 # 3. 가상 환경 활성화 (Windows PowerShell 기준)
 .\venv\Scripts\Activate
 
+# 생성된 가상 환경 안에만 필요한 패키지를 설치합니다.
+pip install -r my_requirements.txt
+
 # 서버 실행
-uvicorn my_server:app --reload --port 8000
+uvicorn my_server:app --reload --port 9000
 
 # 설정 웹사이트
 http://127.0.0.1:8000/settings
@@ -34,6 +37,9 @@ https://hanane.kr/settings
 
 
 
+
+# 깃허브 주소 HATB
+https://github.com/hanane-support/HATB.git
 
 # 깃 초기화
 git init

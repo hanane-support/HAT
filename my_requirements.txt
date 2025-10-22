@@ -1,9 +1,5 @@
+# C:\Python\HATB\my_requirements.txt
 fastapi
 uvicorn[standard]
-pydantic
-sqlalchemy
-psycopg2-binary
-python-binance # 또는 사용할 거래소 API 라이브러리
-httpx          # 비동기 HTTP 클라이언트
-gunicorn       # 프로세스 관리
-python-dotenv  # 환경 변수 관리
+python-multipart
+jinja2 # 템플릿 렌더링을 위해 필요
