@@ -1,22 +1,11 @@
+# C:\Python\HATB\my_install_script.sh (Bash Script)
 #!/bin/bash
 
 # --- 설정 변수 ---
-REPO_URL="YOUR_GITHUB_REPO_URL" # <<<<<< 여기에 실제 GitHub HTTPS 주소를 넣으세요.
+REPO_URL="https://github.com/hanane-support/HATB.git" # <<<<<< 여기에 실제 GitHub HTTPS 주소를 넣으세요.
 PROJECT_DIR="/home/my_hatb_bot"
 PYTHON_BIN="$PROJECT_DIR/my_venv/bin/python3"
 UVICORN_BIN="$PROJECT_DIR/my_venv/bin/uvicorn"
-
-# --- 허용할 IP 목록 ---
-# 1. 사용자 집 IP (관리자 페이지 및 SSH 접속용)
-HOME_IP="61.85.61.62"
-
-# 2. 트레이딩뷰 Webhook IP 목록
-TV_IPS=(
-    "52.89.214.238"
-    "34.212.75.30"
-    "54.218.53.128"
-    "52.32.178.7"
-)
 
 # 1. 서버 업데이트 및 필수 패키지 설치
 sudo apt update
@@ -31,13 +20,15 @@ sudo apt install caddy -y
 # 3. 프로젝트 파일 다운로드
 sudo mkdir -p $PROJECT_DIR
 sudo git clone $REPO_URL $PROJECT_DIR
+# Vultr에서 root로 실행되므로 권한 설정은 생략
+
 cd $PROJECT_DIR
 
 # 4. Python 가상 환경 설정 및 패키지 설치
 python3 -m venv my_venv
 source my_venv/bin/activate
 pip install -r my_requirements.txt
-deactivate
+deactivate # 가상환경 비활성화
 
 # 5. Uvicorn (FastAPI) 서비스 파일 생성
 sudo tee /etc/systemd/system/my_hatb_bot.service > /dev/null <<EOF
@@ -48,6 +39,7 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=$PROJECT_DIR
+# 포트 9000으로 변경
 ExecStart=$UVICORN_BIN my_main:my_app --host 127.0.0.1 --port 9000
 Restart=always
 
@@ -55,7 +47,7 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-# 6. Caddyfile 설정 적용
+# 6. Caddyfile 설정 적용 (my_Caddyfile을 /etc/caddy/Caddyfile로 복사)
 sudo cp $PROJECT_DIR/my_Caddyfile /etc/caddy/Caddyfile 
 
 # 7. 서비스 활성화 및 시작
@@ -65,24 +57,9 @@ sudo systemctl enable my_hatb_bot
 sudo systemctl restart caddy 
 sudo systemctl enable caddy
 
-# 8. 방화벽 설정 (UFW) - 강력한 보안 적용
-# 기본 정책: 들어오는 모든 연결을 거부합니다.
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-
-# A. SSH (22번 포트) 허용: 오직 집 IP에서만 접속 허용
-sudo ufw allow proto tcp from $HOME_IP to any port 22
-
-# B. HTTP/HTTPS (80/443번 포트) 허용: 관리자 페이지 및 웹훅 수신
-#    집 IP (관리자 페이지 접속용) 허용
-sudo ufw allow proto tcp from $HOME_IP to any port 80
-sudo ufw allow proto tcp from $HOME_IP to any port 443
-
-#    트레이딩뷰 IP 목록 (웹훅 수신용) 허용
-for ip in "${TV_IPS[@]}"; do
-    sudo ufw allow proto tcp from $ip to any port 80
-    sudo ufw allow proto tcp from $ip to any port 443
-done
-
-# 방화벽 활성화
+# 8. 방화벽 설정 (SSH, HTTP, HTTPS 허용)
+# Uvicorn은 127.0.0.1 (내부)에서만 통신하므로 외부에서 9000 포트를 열 필요는 없습니다.
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
 sudo ufw enable -y
