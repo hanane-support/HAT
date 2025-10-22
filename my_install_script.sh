@@ -1,14 +1,13 @@
 #!/bin/bash
 
 # --- 설정 변수 ---
-REPO_URL="https://github.com/hanane-support/HATB.git" # <<<<<< 여기에 실제 GitHub HTTPS 주소를 넣으세요.
+REPO_URL="https://github.com/hanane-support/HATB.git"
 PROJECT_DIR="/home/my_hatb_bot"
 PYTHON_BIN="$PROJECT_DIR/my_venv/bin/python3"
 UVICORN_BIN="$PROJECT_DIR/my_venv/bin/uvicorn"
 
-# --- 허용할 IP 목록 ---
-# 1. 사용자 집 IP (관리자 페이지 및 SSH 접속용)
-HOME_IP="61.85.61.62"
+# --- 허용할 IP 목록 (사용자 IP 자동 삽입) ---
+ADMIN_IP="61.85.61.62"
 
 # 2. 트레이딩뷰 Webhook IP 목록
 TV_IPS=(
@@ -48,6 +47,7 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=$PROJECT_DIR
+# 포트 9000 사용
 ExecStart=$UVICORN_BIN my_main:my_app --host 127.0.0.1 --port 9000
 Restart=always
 
@@ -66,19 +66,18 @@ sudo systemctl restart caddy
 sudo systemctl enable caddy
 
 # 8. 방화벽 설정 (UFW) - 강력한 보안 적용
-# 기본 정책: 들어오는 모든 연결을 거부합니다.
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 
-# A. SSH (22번 포트) 허용: 오직 집 IP에서만 접속 허용
-sudo ufw allow proto tcp from $HOME_IP to any port 22
+# A. SSH (22번 포트) 허용: 오직 관리자 IP에서만 접속 허용
+sudo ufw allow proto tcp from $ADMIN_IP to any port 22
 
 # B. HTTP/HTTPS (80/443번 포트) 허용: 관리자 페이지 및 웹훅 수신
-#    집 IP (관리자 페이지 접속용) 허용
-sudo ufw allow proto tcp from $HOME_IP to any port 80
-sudo ufw allow proto tcp from $HOME_IP to any port 443
+#    1. 관리자 IP (집 IP) 웹 접속 허용
+sudo ufw allow proto tcp from $ADMIN_IP to any port 80
+sudo ufw allow proto tcp from $ADMIN_IP to any port 443
 
-#    트레이딩뷰 IP 목록 (웹훅 수신용) 허용
+#    2. 트레이딩뷰 IP 목록 (웹훅 수신용) 허용
 for ip in "${TV_IPS[@]}"; do
     sudo ufw allow proto tcp from $ip to any port 80
     sudo ufw allow proto tcp from $ip to any port 443
