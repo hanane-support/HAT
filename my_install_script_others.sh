@@ -3,8 +3,8 @@
 # ----------------------------------------------------
 # ⚠️ 사용자 정의 변수: 여기에 정확한 GitHub URL을 입력하세요.
 # ----------------------------------------------------
-HATB_REPO_URL="https://github.com/hanane-support/HATB.git"        # 👈 HATB 프로젝트 깃허브 주소
-HATBS_REPO_URL="https://github.com/hanane-support/HATBS.git"      # 👈 HATBS 프로젝트 깃허브 주소 (수정 필요)
+HATB_REPO_URL="YOUR_HATB_REPO_URL"        # 👈 HATB 프로젝트 깃허브 주소
+HATBS_REPO_URL="YOUR_HATBS_REPO_URL"      # 👈 HATBS 프로젝트 깃허브 주소 (수정 필요)
 # ----------------------------------------------------
 
 HATB_DIR="/home/hatb_bot"

@@ -41,6 +41,9 @@ https://hanane.kr/settings
 # 깃허브 주소 HATB
 https://github.com/hanane-support/HATB.git
 
+# 깃허브 주소 HATBS
+https://github.com/hanane-support/HATBS.git
+
 # 깃 초기화
 git init
 
