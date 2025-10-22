@@ -44,6 +44,9 @@ https://github.com/hanane-support/HATB.git
 # 깃 초기화
 git init
 
+# 변경사항 확인
+git status
+
 # 깃 파일추가
 git add .
 
@@ -74,6 +77,7 @@ git push -u origin main
 
 
 # 깃허브 수정내역만 반영
+git status
 git add .
 git commit -m "변경사항"
 git push origin main

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- 설정 변수 ---
-REPO_URL="YOUR_GITHUB_REPO_URL" # <<<<<< 여기에 실제 GitHub HTTPS 주소를 넣으세요.
+REPO_URL="https://github.com/hanane-support/HATB.git" # <<<<<< 여기에 실제 GitHub HTTPS 주소를 넣으세요.
 PROJECT_DIR="/home/my_hatb_bot"
 PYTHON_BIN="$PROJECT_DIR/my_venv/bin/python3"
 UVICORN_BIN="$PROJECT_DIR/my_venv/bin/uvicorn"
