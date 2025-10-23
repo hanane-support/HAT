@@ -1,5 +1,0 @@
-# C:\Python\HATB\my_requirements.txt
-fastapi
-uvicorn[standard]
-python-multipart
-jinja2 # 템플릿 렌더링을 위해 필요
