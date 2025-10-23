@@ -1,6 +1,0 @@
-:80 {
-    # HATB (Bot/Admin) -> 9000 포트
-    handle / {
-        reverse_proxy 127.0.0.1:9000
-    }
-}
