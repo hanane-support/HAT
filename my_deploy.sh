@@ -7,7 +7,7 @@ apt install -y python3-pip python3-venv git
 
 # 2. 프로젝트 클론 및 가상 환경 설정
 PROJECT_DIR="HAT"
-REPO_URL="YOUR_GITHUB_REPO_URL" # ⭐여기에 당신의 GitHub HTTPS 주소를 넣어주세요.
+REPO_URL="https://github.com/hanane-support/HAT.git" # ⭐여기에 당신의 GitHub HTTPS 주소를 넣어주세요.
 USER="ubuntu" 
 
 mkdir -p /home/$USER/$PROJECT_DIR
