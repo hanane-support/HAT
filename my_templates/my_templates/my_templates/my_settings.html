@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAT Bot Settings</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #03dac6;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        h1 { color: var(--primary-color); }
+        form label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+        form input[type="text"], form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: 1px solid #555;
+            color: var(--text-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        form button {
+            background: var(--primary-color);
+            border: none;
+            padding: 10px 20px;
+            color: #121212;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            background: #388e3c; /* Green for success */
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>서버 설정 관리</h1>
+        <p><a href="/admin" style="color: #8be9fd;">&lt; 대시보드로 돌아가기</a></p>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <form method="post" action="/admin/settings">
+            
+            <h2>트레이딩뷰 웹훅 설정</h2>
+            <label for="webhook_secret">웹훅 시크릿 키 (Webhook Secret Key)</label>
+            <input type="text" id="webhook_secret" name="webhook_secret" 
+                   value="{{ settings.webhook_secret }}" required>
+            
+            <p style="font-size: 0.8em; color: #999;">트레이딩뷰 알림 설정에 입력해야 하는 비밀 키입니다.</p>
+
+            <h2>관리자 계정 설정</h2>
+            <label for="admin_user">관리자 사용자명 (Username)</label>
+            <input type="text" id="admin_user" name="admin_user" 
+                   value="{{ settings.admin_user }}" required>
+
+            <label for="admin_pass">관리자 비밀번호 (변경 시에만 입력하세요)</label>
+            <input type="password" id="admin_pass" name="admin_pass" placeholder="변경할 비밀번호를 입력하세요." autocomplete="off">
+            <p style="font-size: 0.8em; color: #999;">변경하지 않으려면 빈칸으로 두세요.</p>
+
+            <button type="submit">설정 저장</button>
+        </form>
+    </div>
+</body>
+</html>

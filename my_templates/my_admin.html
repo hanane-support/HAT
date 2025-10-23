@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAT Bot Admin Panel</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #03dac6;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        h1 { color: var(--primary-color); }
+        .status-card {
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 5px solid var(--primary-color);
+            background-color: #2c2c2c;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HAT Upbit 자동매매 서버 관리자 페이지</h1>
+        <p>환영합니다. 관리자님!</p>
+
+        <h2>서버 상태 정보</h2>
+        <div class="status-card">
+            <p><strong>서버 포트:</strong> {{ port }}</p>
+            <p><strong>관리자 계정:</strong> {{ user }}</p>
+            <p><strong>서버 시작 시간:</strong> {{ start_time }}</p>
+            <p style="color: green;">**주문 Webhook 엔드포인트: /webhook**</p>
+            <p>트레이딩뷰 웹훅을 받으면, 주문 로직이 실행됩니다.</p>
+        </div>
+        
+        <p style="margin-top: 20px;"><a href="/admin/settings" style="color: yellow;">[설정 관리 페이지로 이동]</a></p>
+        <p style="margin-top: 30px;"><a href="/admin/logout" style="color: #bb86fc;">[로그아웃]</a></p>
+    </div>
+</body>
+</html>

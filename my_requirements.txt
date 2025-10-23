@@ -1,0 +1,6 @@
+# my_requirements.txt
+fastapi
+uvicorn[standard]
+jinja2
+python-multipart
+pydantic
