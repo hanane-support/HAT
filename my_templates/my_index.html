@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #1e1e1e; color: #d4d4d4; }
+        h1 { color: #6be06b; }
+        .container { max-width: 800px; margin: 0 auto; background: #252525; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); }
+        a { color: #569cd6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .alert-success { background-color: #387038; padding: 10px; border-radius: 4px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <p class="alert-success">
+            ✅ my_FastAPI AutoBot 서버가 포트 9000으로 정상 실행 중입니다.
+        </p>
+        
+        <h2>my_관리 및 API 정보</h2>
+        <ul>
+            <li><strong>my_웹훅 수신 URL:</strong> <code>http://[서버IP]:9000/my_webhook</code> (POST 요청 필요)</li>
+            <li><strong>my_API 문서 (관리자 기능):</strong> <a href="{{ api_doc_url }}">Go to Swagger UI (API Docs)</a></li>
+        </ul>
+        <p>API 문서(Swagger UI)에서 웹훅 형식, 비밀번호 관리 등 API 관련 정보를 확인하고 테스트할 수 있습니다.</p>
+    </div>
+</body>
+</html>
