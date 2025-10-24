@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAT Service Introduction</title>
+    <style>
+        /* CSS 변수를 이용한 블랙 다크 테마 설정 */
+        :root {
+            --bg-color-black: #121212;
+            --text-color-light: #e0e0e0;
+            --header-bg-dark: #1e1e1e;
+            --sidebar-bg-dark: #222222;
+            --sidebar-item-hover-dark: #333333;
+            --sidebar-item-active-dark: #007bff;
+            --accent-color: #007bff;
+            --border-color-dark: #333333;
+            --card-bg-dark: #222222;
+            --warning-color: #ffcc00; /* 경고 텍스트 색상 추가 */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--bg-color-black);
+            color: var(--text-color-light);
+        }
+
+        /* 전체 레이아웃 */
+        .container { display: flex; width: 100%; }
+
+        /* 사이드바 스타일 */
+        .sidebar { 
+            width: 250px; 
+            background-color: var(--sidebar-bg-dark); 
+            padding: 20px 0;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            /* [수정] 사이드바 폭 고정: flex-shrink: 0 추가 */
+            flex-shrink: 0;
+        }
+        .sidebar h2 { color: var(--text-color-light); text-align: center; margin-bottom: 30px; padding: 0 15px; font-size: 1.5em; }
+        .sidebar ul { list-style: none; padding: 0; width: 100%; }
+        .sidebar ul li { width: 100%; }
+        .sidebar ul li a { 
+            display: block; 
+            padding: 15px 25px; 
+            color: var(--text-color-light); 
+            text-decoration: none; 
+            transition: background-color 0.2s, border-left-color 0.2s; 
+            border-left: 5px solid transparent; 
+            /* [수정] 메뉴 텍스트 가운데 정렬 */
+            text-align: center;
+        }
+        .sidebar ul li a:hover { background-color: var(--sidebar-item-hover-dark); }
+        .sidebar ul li a.active { background-color: var(--header-bg-dark); border-left-color: var(--accent-color); font-weight: bold; }
+
+        /* 메인 콘텐츠 영역 */
+        .main-content {
+            flex-grow: 1; padding: 40px; background-color: var(--bg-color-black);
+        }
+        .header {
+            background-color: var(--header-bg-dark); color: var(--text-color-light); padding: 15px 20px;
+            border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header h1 { margin: 0; font-size: 1.5em; }
+
+        /* 소개 내용 스타일 */
+        .intro-section h2 {
+            color: var(--accent-color);
+            margin-top: 30px;
+            border-bottom: 1px solid var(--border-color-dark);
+            padding-bottom: 5px;
+        }
+        .intro-section p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .intro-section ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-top: 15px;
+            color: #ccc;
+        }
+        .intro-section li {
+            margin-bottom: 10px;
+        }
+
+        /* 경고 섹션 스타일 */
+        .warning-section {
+            background-color: #3a2a1a; /* 어두운 오렌지 계열 배경 */
+            border: 1px solid var(--warning-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        .warning-section h2 {
+            color: var(--warning-color);
+            margin-top: 0;
+            border-bottom: 1px solid var(--warning-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .warning-section p, .warning-section ul {
+            color: #ffebcd; /* 연한 텍스트 */
+            line-height: 1.7;
+        }
+        .warning-section li {
+            margin-bottom: 20px; /* 목록 항목 간 간격 증가 */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <h2>HAT</h2> 
+            <nav>
+                <ul>
+                    <!-- 소개 탭 - 활성화 -->
+                    <li><a href="/admin/intro" class="active">소개</a></li>
+                    <li><a href="/admin">트레이딩뷰 웹훅 내역</a></li>
+                    <li><a href="/admin/domain">도메인 연결 및 보안</a></li>
+                    <li><a href="#">국내 거래소</a></li>
+                    <li><a href="#">해외 거래소</a></li>
+                    <li><a href="#">마이페이지</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 메인 콘텐츠 영역 -->
+        <main class="main-content">
+            <header class="header">
+                <!-- 상단 타이틀 -->
+                <h1>HAT Service Introduction</h1> 
+            </header>
+            
+            <section class="intro-section">
+                
+                <h2 style="font-size: 1.8em; margin-bottom: 10px;">Hanane Auto Trading (HAT) 소개</h2>
+                <p>
+                    Hanane Auto Trading (HAT)은 사용자의 독자적인 매매 전략을 24시간 자동 실행하도록 돕기 위해 설계된 **웹훅 기반 자동 주문 체결 지원 시스템**입니다.
+                </p>
+
+                <h2>시스템 구성 및 작동 원리</h2>
+                <p>HAT 시스템은 크게 세 가지 주요 요소 간의 유기적인 연동을 통해 자동매매 과정을 지원합니다.</p>
+                <ul>
+                    <li>
+                        <strong>전략 생성 (TradingView):</strong>
+                        사용자가 TradingView에서 정의한 기술적 분석 조건이 충족되면, 해당 정보를 담은 **웹훅(Webhook) 메시지**가 생성됩니다. 이는 주문 처리를 위한 요청 신호입니다.
+                    </li>
+                    <li>
+                        <strong>데이터 수신 및 처리 (HAT 서버):</strong>
+                        Vultr와 같은 클라우드 환경에 구축된 HAT 서버는 이 웹훅 메시지를 실시간으로 수신합니다. 이 서버는 사용자의 **자동매매 중계기** 역할을 수행하며, 메시지를 해석하고 거래소로 전달할 준비를 합니다.
+                    </li>
+                    <li>
+                        <strong>주문 체결 (거래소):</strong>
+                        HAT 서버는 수신된 명령에 따라 연결된 국내외 암호화폐 거래소(Exchange)의 API를 통해 사전에 설정된 조건(매수/매도, 수량 등)으로 **주문 처리를 시도**합니다.
+                    </li>
+                </ul>
+                
+                <h2>HAT의 주요 기능 및 특징</h2>
+                <ul>
+                    <li>
+                        <strong>24시간 서버 운영:</strong>
+                        클라우드 서버 기반으로 구축되어, 사용자의 개인 컴퓨터와 관계없이 연중무휴 전략을 실행합니다. 서버 기반으로 시장 대응에 도움을 줄 수 있습니다.
+                    </li>
+                    <li>
+                        <strong>사용자 친화적 관리자 페이지:</strong>
+                        별도의 복잡한 코드를 수정할 필요 없이, 웹 기반 관리자 페이지를 통해 연결 상태 확인, 거래소 API 설정, 도메인 설정 등을 **직관적으로 관리**할 수 있습니다.
+                    </li>
+                    <li>
+                        <strong>빠른 처리 능력:</strong>
+                        웹훅을 통한 직접적인 통신 방식을 사용하여 데이터 전송 지연을 최소화하며, 웹훅 메시지 수신 후 빠른 처리를 지원합니다.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 중요 고지 및 면책 사항 섹션 추가 -->
+            <section class="warning-section">
+                <h2>⚠️ 중요 고지 및 면책 사항</h2>
+                <p style="font-weight: bold;">
+                    자동매매 시스템은 투자의 보조 도구이며, 시스템 이용 및 작동 환경의 외부 요인으로 인해 예상치 못한 결과가 발생할 수 있습니다.
+                </p>
+                <ul>
+                    <li>
+                        <strong>투자 책임:</strong>
+                        본 시스템을 통한 모든 투자 결정 및 그로 인해 발생하는 손익에 대한 책임은 전적으로 **투자자 본인**에게 있습니다. 서비스를 이용하기 전 투자 위험을 충분히 숙지하시기 바랍니다.
+                    </li>
+                    <li>
+                        <strong>트레이딩뷰 웹훅 이슈:</strong>
+                        트레이딩뷰 자체 시스템의 문제, 서버 부하, 또는 내부 업데이트 등으로 인해 웹훅 메시지 전송이 지연되거나 누락될 수 있습니다. 온전한 웹훅을 전송하지 못한 트레이딩뷰에 의해 손익이 발생할 수 있음을 충분히 이해하시고, 이에 대한 책임 역시 **투자자 본인**에게 있습니다.
+                    </li>
+                    <li>
+                        <!-- 통신 환경 영향 문구 수정: '원활한 체결' 삭제 -->
+                        <strong>통신 환경 영향:</strong>
+                        우천, 기상 악화, 또는 기타 전세계적인 통신 환경의 불안정으로 인해 인터넷 데이터 전송에 지연 또는 손실이 발생할 수 있습니다. 이러한 외부 통신 장애는 자동매매에 영향을 줄 수 있으며, 이로 인해 발생하는 손익에 대한 책임은 **투자자 본인**에게 있습니다.
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 현재 URL 경로에 따라 active 클래스 동적 추가
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuLinks = document.querySelectorAll('.sidebar ul li a');
+            const currentPath = window.location.pathname;
+
+            menuLinks.forEach(link => {
+                // 정확히 경로가 일치하면 active 클래스 추가
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
